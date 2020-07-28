@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using NpgsqlTypes;
 
-namespace postgresearch.Migrations
+namespace Postgresearch.Migrations
 {
     public partial class SearchVectorToProducts : Migration
     {

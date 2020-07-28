@@ -8,6 +8,13 @@ namespace Postgresearch.Models
         {         
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasIndex(p => p.SearchVector)
+                .HasMethod("GIN"); // Index method on the search vector (GIN or GIST)
+        }
+
         public DbSet<Category> Categories { get; set; } 
         public DbSet<Product> Products { get; set; }   
 

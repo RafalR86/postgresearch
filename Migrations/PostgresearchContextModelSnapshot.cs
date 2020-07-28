@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using NpgsqlTypes;
 using Postgresearch.Models;
 
-namespace postgresearch.Migrations
+namespace Postgresearch.Migrations
 {
     [DbContext(typeof(PostgresearchContext))]
     partial class PostgresearchContextModelSnapshot : ModelSnapshot
@@ -56,6 +56,9 @@ namespace postgresearch.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SearchVector")
+                        .HasAnnotation("Npgsql:IndexMethod", "GIN");
 
                     b.ToTable("Products");
                 });

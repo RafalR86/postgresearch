@@ -6,57 +6,53 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Postgresearch.Models;
-using Postgresearch.Dtos;
-using AutoMapper;
 
 namespace Postgresearch.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly PostgresearchContext _context;
-        private readonly IMapper _mapper;
 
-        public ProductController(PostgresearchContext context, IMapper mapper)
+        public CategoryController(PostgresearchContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        // GET: api/Product
+        // GET: api/Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-        // GET: api/Product/5
+        // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
 
-            if (product == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return category;
         }
 
-        // PUT: api/Product/5
+        // PUT: api/Category/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != product.Id)
+            if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +60,7 @@ namespace Postgresearch.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -77,38 +73,37 @@ namespace Postgresearch.Controllers
             return NoContent();
         }
 
-        // POST: api/Product
+        // POST: api/Category
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(ProductDto productDto)
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
-            var product = _mapper.Map<Product>(productDto);
-            _context.Products.Add(product);
+            _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/Category/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        public async Task<ActionResult<Category>> DeleteCategory(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
-            return product;
+            return category;
         }
 
-        private bool ProductExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

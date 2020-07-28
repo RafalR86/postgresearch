@@ -10,8 +10,8 @@ using Postgresearch.Models;
 namespace Postgresearch.Migrations
 {
     [DbContext(typeof(PostgresearchContext))]
-    [Migration("20200722180440_SearchVectorToProducts")]
-    partial class SearchVectorToProducts
+    [Migration("20200723180527_TriggerProductTsVector")]
+    partial class TriggerProductTsVector
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace Postgresearch.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SearchVector")
+                        .HasAnnotation("Npgsql:IndexMethod", "GIN");
 
                     b.ToTable("Products");
                 });

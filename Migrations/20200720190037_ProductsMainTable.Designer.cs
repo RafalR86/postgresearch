@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Postgresearch.Models;
 
-namespace postgresearch.Migrations
+namespace Postgresearch.Migrations
 {
     [DbContext(typeof(PostgresearchContext))]
     [Migration("20200720190037_ProductsMainTable")]

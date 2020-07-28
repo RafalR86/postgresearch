@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace postgresearch.Migrations
+namespace Postgresearch.Migrations
 {
     public partial class ProductsMainTable : Migration
     {
