@@ -15,7 +15,7 @@ namespace Postgresearch.Migrations
             migrationBuilder.Sql(
                 @"CREATE TRIGGER product_search_vector_update BEFORE INSERT OR UPDATE
                 ON ""Products"" FOR EACH ROW EXECUTE PROCEDURE
-                tsvector_update_trigger(""SearchVector"", 'pg_catalog.english', ""Symbol"");");
+                tsvector_update_trigger(""SearchVector"", 'pg_catalog.english', ""Symbol"", ""Name"", ""Description"");");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -51,6 +51,12 @@ namespace Postgresearch.Migrations
                     b.Property<string>("Symbol")
                         .HasColumnType("text");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
