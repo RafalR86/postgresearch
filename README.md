@@ -14,5 +14,6 @@ The purpose of the project is to check postgresql advantages and disadvantages a
 ### Installation
 
 ```
-- Change connection string in appsettings.Development.json
+- Create your appsettings file based on appsettings.Development.json.template file, e.g. appsettings.Development.json for development environment
+- Change connection string in appsettings file
 ```

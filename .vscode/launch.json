@@ -11,7 +11,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "/home/rafal/vscodeprojects/postgresearch/bin/Debug/netcoreapp3.1/postgresearch.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/postgresearch.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
