@@ -1,17 +1,24 @@
-import { Command, Console, createSpinner } from "nestjs-console";
+import { Command } from "@squareboat/nest-console";
+import { Injectable } from "@nestjs/common";
+import { createSpinner } from "nestjs-console";
+import { getComments } from "../import/xml.parser";
 
-@Console({
-  command: "import-comments",
-  description: "Import comments from a xml",
-})
-export class GenerateDdl {
-  @Command({
-    command: "all",
-    description: "Generating all DDL's ",
+@Injectable()
+export class CommentsImportService {
+  @Command('import-comments', {
+    desc: 'Import command',
+    args: { name: { req: false } },
   })
-  async generateDdl() {
+  async getComments() {
     const spin = createSpinner();
     spin.start(`Importing comments`);
+
+    try {
+      await getComments();
+    } catch (e) {
+      console.log(e);
+    }
+
     spin.succeed("Done");
   }
 }

@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CommentModule } from './comments/comment.module';
 import { ormConfig } from "../ormconfig";
-import { ConsoleModule } from "nestjs-console";
+import { ConsoleModule } from "@squareboat/nest-console";
+import { CommentsImportService } from "./comments/comments-import.service";
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { ConsoleModule } from "nestjs-console";
     ConsoleModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [CommentsImportService],
 })
 export class AppModule {}
