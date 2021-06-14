@@ -6,7 +6,7 @@ import * as fs from "fs";
 import { Comment } from "./comment.interface";
 
 export const getComments = async (): Promise<{ $: Comment }[]> => {
-  const filePath = "../../imports/Comments.xml";
+  const filePath = __dirname + "/../../../imports/Comments.xml";
   if (!existsSync(filePath)) {
     throw new NoFileToImportError();
   }
