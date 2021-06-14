@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Comment } from "../comment.entity";
-import { CommentDto } from "../comment.dto";
 
 @Injectable()
 export class CommentsService {
@@ -10,10 +9,11 @@ export class CommentsService {
     private readonly commentRepository
   ) {}
 
-  async create(commentDto: CommentDto) {
+  async create(content: string) {
     const comment = new Comment();
-    comment.content = commentDto.text;
-    comment.searchVector = this.commentRepository.queryRunner(`SELECT to_tsvector(${commentDto.text});`);
-    this.commentRepository.save(comment);
+    const searchVector = await this.commentRepository.manager.query(`SELECT to_tsvector('${content.replace(/'/g, "")}');`);
+    comment.content = content.replace(/'/g, "");
+    comment.searchVector = searchVector[0].to_tsvector;
+    await this.commentRepository.save(comment);
   }
 }

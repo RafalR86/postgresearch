@@ -1,10 +1,15 @@
 import { Command } from "@squareboat/nest-console";
 import { Injectable } from "@nestjs/common";
 import { createSpinner } from "nestjs-console";
-import { getComments } from "../import/xml.parser";
+import { getComments } from "./xml.parser";
+import { CommentsService } from "../comments/services/comments.service";
 
 @Injectable()
 export class CommentsImportService {
+  constructor(
+    private readonly commentsService: CommentsService
+  ) {}
+
   @Command('import-comments', {
     desc: 'Import command',
     args: { name: { req: false } },
@@ -14,7 +19,10 @@ export class CommentsImportService {
     spin.start(`Importing comments`);
 
     try {
-      await getComments();
+      const comments = await getComments();
+      for (const comment of comments) {
+        await this.commentsService.create(comment.$.Text);
+      }
     } catch (e) {
       console.log(e);
     }
