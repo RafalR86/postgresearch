@@ -37,3 +37,25 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 ```
+
+### Importing sample data to database
+I prepared import for this file:
+```
+https://archive.org/download/stackexchange/drupal.stackexchange.com.7z
+```
+But you can adjust it for another files (bigger smaller) from this site:
+
+```
+https://archive.org/download/stackexchange
+```
+
+To start import:
+1) Put downloaded Comments.xml file to "imports" directory
+2) Build project
+```
+$ npm run build
+```
+3) Run command:
+```
+$ npm run inport-comments
+```
