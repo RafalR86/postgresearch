@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'comments' })
 export class Comment {
@@ -8,6 +8,6 @@ export class Comment {
   @Column('text')
   content: string;
 
-  @Column({ type: 'tsvector'})
-  searchVector: string
+  @Column({ name: 'search_vector', type: 'tsvector'})
+  search_vector: string;
 }
